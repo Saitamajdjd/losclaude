@@ -1,0 +1,20 @@
+{
+  "name": "los-cloud",
+  "version": "1.0.0",
+  "description": "LOS Cloud - Gestão Esports & AWS",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "build": "npm run build --prefix client",
+    "start": "npm start --prefix server",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "test:db": "node server/scripts/test-db.js",
+    "migrate:db": "node server/scripts/migrate-db.js",
+    "migrate:matches": "node server/scripts/migrate-match-strategic.js",
+    "postinstall": "npm install --prefix server && npm install --prefix client && npm run build --prefix client"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
