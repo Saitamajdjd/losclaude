@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const env = require('./config/env');
+const { corsOptions } = require('./config/cors');
 const { logOpenRouterConfig } = require('./services/aiService');
 const { initDatabase } = require('./config/initDb');
 const pool = require('./config/db');
@@ -18,15 +19,7 @@ const youtubeRoutes = require('./routes/youtube');
 const app = express();
 
 app.use(
-  cors({
-    origin: [
-      'http://localhost:5173',
-      'http://127.0.0.1:5173',
-      'http://localhost:5000',
-      'http://127.0.0.1:5000',
-    ],
-    credentials: true,
-  })
+  cors(corsOptions)
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
