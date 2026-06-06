@@ -15,6 +15,6 @@
     "postinstall": "npm install --prefix server && npm install --prefix client"
   },
   "engines": {
-    "node": ">=18"
+    "node": "20.x"
   }
 }
