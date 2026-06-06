@@ -12,7 +12,7 @@
     "test:db": "node server/scripts/test-db.js",
     "migrate:db": "node server/scripts/migrate-db.js",
     "migrate:matches": "node server/scripts/migrate-match-strategic.js",
-    "postinstall": "npm install --prefix server && npm install --prefix client && npm run build --prefix client"
+    "postinstall": "npm install --prefix server && npm install --prefix client"
   },
   "engines": {
     "node": ">=18"
