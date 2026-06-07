@@ -48,6 +48,7 @@ module.exports = {
     bucket: trim(process.env.AWS_S3_BUCKET) || '',
     accessKeyId: trim(process.env.AWS_ACCESS_KEY_ID) || '',
     secretAccessKey: trim(process.env.AWS_SECRET_ACCESS_KEY) || '',
+    publicUrl: trim(process.env.AWS_S3_PUBLIC_URL) || '',
   },
   openrouter: {
     apiKey: trim(process.env.OPENROUTER_API_KEY) || '',

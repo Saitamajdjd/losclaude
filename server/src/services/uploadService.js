@@ -5,6 +5,7 @@ const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const env = require('../config/env');
 
 const UPLOAD_DIR = path.join(__dirname, '../../uploads/players');
+const S3_UPLOAD_PREFIX = 'uploads/players';
 
 const s3Enabled = Boolean(env.aws.bucket && env.aws.accessKeyId && env.aws.secretAccessKey);
 
@@ -28,6 +29,18 @@ function sanitizeFilename(name) {
   return String(name).replace(/[^a-zA-Z0-9._-]/g, '_');
 }
 
+function getS3PublicBaseUrl() {
+  if (env.aws.publicUrl) {
+    return env.aws.publicUrl.replace(/\/+$/, '');
+  }
+
+  return `https://${env.aws.bucket}.s3.${env.aws.region}.amazonaws.com`;
+}
+
+function buildS3PublicUrl(key) {
+  return `${getS3PublicBaseUrl()}/${key}`;
+}
+
 async function uploadImage(file) {
   ensureUploadDir();
 
@@ -39,7 +52,7 @@ async function uploadImage(file) {
   const localUrl = `/uploads/players/${filename}`;
 
   if (s3Enabled && s3Client) {
-    const key = `players/${filename}`;
+    const key = `${S3_UPLOAD_PREFIX}/${filename}`;
     try {
       await s3Client.send(
         new PutObjectCommand({
@@ -50,6 +63,7 @@ async function uploadImage(file) {
         })
       );
       console.log('S3: imagem enviada —', key);
+      return buildS3PublicUrl(key);
     } catch (err) {
       console.error('S3: falha no upload, usando armazenamento local —', err.message);
     }
