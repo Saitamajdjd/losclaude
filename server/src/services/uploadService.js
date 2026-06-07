@@ -5,7 +5,7 @@ const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const env = require('../config/env');
 
 const UPLOAD_DIR = path.join(__dirname, '../../uploads/players');
-const S3_UPLOAD_PREFIX = 'uploads/players';
+const S3_UPLOAD_PREFIX = 'players';
 
 const s3Enabled = Boolean(env.aws.bucket && env.aws.accessKeyId && env.aws.secretAccessKey);
 

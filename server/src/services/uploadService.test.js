@@ -121,10 +121,10 @@ test('returns a public S3 URL after successful upload', async () => {
       buffer: Buffer.from('image'),
     });
 
-    assert.equal(url, 'https://los-bucket.s3.sa-east-1.amazonaws.com/uploads/players/s3-id-player_photo.webp');
+    assert.equal(url, 'https://los-bucket.s3.sa-east-1.amazonaws.com/players/s3-id-player_photo.webp');
     assert.equal(loaded.commands.length, 1);
     assert.equal(loaded.commands[0].input.Bucket, 'los-bucket');
-    assert.equal(loaded.commands[0].input.Key, 'uploads/players/s3-id-player_photo.webp');
+    assert.equal(loaded.commands[0].input.Key, 'players/s3-id-player_photo.webp');
     assert.equal(loaded.commands[0].input.ContentType, 'image/webp');
   } finally {
     if (service) cleanupUpload(service, 's3-id-player_photo.webp');
@@ -154,8 +154,8 @@ test('uses AWS_S3_PUBLIC_URL when configured', async () => {
       buffer: Buffer.from('image'),
     });
 
-    assert.equal(url, 'https://cdn.example.com/media/uploads/players/custom-id-photo.png');
-    assert.equal(loaded.commands[0].input.Key, 'uploads/players/custom-id-photo.png');
+    assert.equal(url, 'https://cdn.example.com/media/players/custom-id-photo.png');
+    assert.equal(loaded.commands[0].input.Key, 'players/custom-id-photo.png');
   } finally {
     if (service) cleanupUpload(service, 'custom-id-photo.png');
     restoreUuid();
